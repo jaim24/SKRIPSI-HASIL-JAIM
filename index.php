@@ -103,7 +103,6 @@
                 <th>Tanggal Pembayaran</th>
                 <th>Keterangan</th>
                 <th>Jumlah Bayar</th>
-                <th>Aksi</th> <!-- Kolom untuk aksi (hapus) -->
             </tr>
         </thead>
         <tbody>
@@ -112,8 +111,10 @@
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
+                    // Format tanggal dan jumlah uang
                     $formatted_date = date('d-m-Y', strtotime($row['tanggal']));
                     $formatted_amount = "Rp." . number_format($row['jumlah'], 0, ',', '.');
+
                     echo "<tr>
                             <td>{$row['nama_siswa']}</td>
                             <td>{$row['kelas']}</td>
@@ -121,22 +122,19 @@
                             <td>{$formatted_date}</td>
                             <td>{$row['keterangan']}</td>
                             <td>{$formatted_amount}</td>
-                            <td>
-                                <form action='delete.php' method='GET' onsubmit='return confirm(\"Apakah Anda yakin ingin menghapus data ini?\");'>
-                                    <input type='hidden' name='id' value='{$row['id']}'>
-                                    <button type='submit' class='btn-hapus'>
-                                        <i class='fa fa-trash'></i> Hapus
-                                    </button>
-                                </form>
-                            </td>
                           </tr>";
                 }
             } else {
-                echo "<tr><td colspan='7'>Belum ada data pembayaran.</td></tr>";
+                echo "<tr><td colspan='6'>Belum ada data pembayaran.</td></tr>";
             }
             ?>
         </tbody>
     </table>
+
+    <!-- Tombol download PDF -->
+    <form action="generate_pdf.php" method="GET">
+        <button type="submit" class="btn-pdf">Download Laporan PDF</button>
+    </form>
 </div>
 
 
