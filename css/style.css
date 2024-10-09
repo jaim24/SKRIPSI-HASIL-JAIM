@@ -4,6 +4,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+html {
+    scroll-behavior: smooth; /* Membuat semua scroll di halaman menjadi smooth */
+}
 
 body {
     background-image: url('../images/foto-anak.jpg'); /* Path menuju gambar */
@@ -53,6 +56,8 @@ input, select {
     border-radius: 5px;
     font-size: 1rem;
     background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    border: 1px solid #ccc;
 }
 
 select {
@@ -64,6 +69,10 @@ select:focus {
     outline: none;
 }
 
+input:focus, select:focus {
+    border-color: #4A90E2; /* Warna border berubah saat fokus */
+    transform: scale(1.03); /* Sedikit membesar saat fokus */
+}
 /* Style untuk optgroup */
 optgroup {
     font-weight: bold;
@@ -83,10 +92,12 @@ button, .btn-pdf {
 button {
     background-color: #4A90E2;
     color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #357ABD;
+    background-color: #357ABD; /* Warna berubah saat hover */
+    transform: scale(1.05); /* Button sedikit membesar saat hover */
 }
 
 .btn-pdf {
@@ -117,6 +128,7 @@ table, th, td {
 th, td {
     padding: 12px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
@@ -251,3 +263,22 @@ option {
 .btn-hapus:hover {
     background-color: #c0392b; /* Warna lebih gelap saat hover */
 }
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-in-out;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
